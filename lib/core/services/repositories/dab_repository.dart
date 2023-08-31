@@ -7,7 +7,7 @@ import 'package:just_audio/just_audio.dart';
 class DABRepositoryImpl implements DABPlusRepository {
   final AudioPlayer player;
 
-  DABRepositoryImpl({required this.player});
+  DABRepositoryImpl(this.player);
 
   @override
   Future<Either<ErrorDescription, List<DABStationModel>>> scan() {
@@ -47,6 +47,16 @@ class DABRepositoryImpl implements DABPlusRepository {
       return const Right(null);
     } catch (e) {
       return Left(ErrorDescription("Clossing stopped"));
+    }
+  }
+
+  @override
+  Future<Either<ErrorDescription, void>> playRadio() async {
+    try {
+      await player.play();
+      return const Right(null);
+    } catch (e) {
+      return Left(ErrorDescription("unable to play station"));
     }
   }
 }

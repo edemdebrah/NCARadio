@@ -4,7 +4,8 @@ class SmallRoundNeu extends StatelessWidget {
   final IconData icon;
   final Color color;
 
-  SmallRoundNeu({
+  const SmallRoundNeu({
+    super.key,
     required this.icon,
     this.color = Colors.grey,
   });
@@ -18,11 +19,11 @@ class SmallRoundNeu extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade600,
-            offset: Offset(15, 15),
+            offset: const Offset(15, 15),
             blurRadius: 20,
             spreadRadius: 4.0,
           ),
-          BoxShadow(
+          const BoxShadow(
             color: Colors.white,
             offset: Offset(-4, -4),
             blurRadius: 10,
@@ -41,11 +42,11 @@ class SmallRoundNeu extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.shade700,
-                offset: Offset(15, 15),
+                offset: const Offset(15, 15),
                 blurRadius: 20,
                 spreadRadius: 4.0,
               ),
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.white,
                 offset: Offset(-4, -4),
                 blurRadius: 10,
@@ -55,7 +56,7 @@ class SmallRoundNeu extends StatelessWidget {
           ),
           child: Center(
             child: Icon(
-              icon as IconData?,
+              icon,
               size: 40,
               color: color,
             ),

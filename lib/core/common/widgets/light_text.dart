@@ -5,7 +5,8 @@ class LightText extends StatelessWidget {
   final String textName;
   final double fontSize;
 
-  LightText({
+  const LightText({
+    super.key,
     required this.textName,
     this.fontSize = 18,
   });
@@ -19,7 +20,6 @@ class LightText extends StatelessWidget {
         fontSize: fontSize,
         color: Colors.black54,
         fontWeight: FontWeight.bold,
-        
       ),
     );
   }

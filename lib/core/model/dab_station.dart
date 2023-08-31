@@ -13,18 +13,17 @@ class DABStationModel with _$DABStationModel {
     required String channelUrl,
   }) = _DABStationModel;
 
-  factory DABStationModel.fromJson(Map<String, dynamic> json) =>
-      _$DABStationModelFromJson(json);
+  factory DABStationModel.fromJson(Map<String, dynamic> json) => _$DABStationModelFromJson(json);
 
   static List<DABStationModel> stationsList = const [
     DABStationModel(
-      channelUrl: "",
+      channelUrl: "https://radio.com.gh/gbc-uniiq-fm/",
       stationName: 'Uniiq FM',
       location: 'GBC, Accra',
       image: 'assets/images/uniiq_fm.jpeg',
     ),
     DABStationModel(
-      channelUrl: "",
+      channelUrl: "https://radioghana.net/angel-fm",
       stationName: 'Angel FM',
       location: 'Bantama, Kumasi',
       image: 'assets/images/angel_fm.webp',

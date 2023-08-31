@@ -6,10 +6,10 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               //on air image
               Container(
-                margin: EdgeInsets.all(
+                margin: const EdgeInsets.all(
                   20,
                 ),
                 height: 150,
@@ -41,11 +41,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              Container(
+              const SizedBox(
                 height: 80,
-                child: const SearchField(),
+                child: SearchField(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -56,17 +56,14 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                     itemCount: DABStationModel.stationsList.length,
                     itemBuilder: (context, index) {
-                      final stationsListCurrentIndex =
-                          DABStationModel.stationsList[index];
+                      final stationsListCurrentIndex = DABStationModel.stationsList[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20.0,
                           vertical: 10,
                         ),
                         child: StationsList(
-                          stationName: stationsListCurrentIndex.stationName,
-                          location: stationsListCurrentIndex.location,
-                          image: stationsListCurrentIndex.image,
+                          station: stationsListCurrentIndex,
                         ),
                       );
                     }),
@@ -80,8 +77,8 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.grey.shade300,
         color: Colors.green.shade300,
         buttonBackgroundColor: Colors.red,
-        animationDuration: Duration(milliseconds: 500),
-        items: <Widget>[
+        animationDuration: const Duration(milliseconds: 500),
+        items: const <Widget>[
           Icon(
             Icons.favorite,
             size: 30,

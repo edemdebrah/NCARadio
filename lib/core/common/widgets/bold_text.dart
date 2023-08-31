@@ -5,7 +5,8 @@ class BoldText extends StatelessWidget {
   final String textName;
   final double fontSize;
 
-  BoldText({
+  const BoldText({
+    super.key,
     required this.textName,
     this.fontSize = 22,
   });

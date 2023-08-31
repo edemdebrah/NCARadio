@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class GlassMorphism extends StatelessWidget {
-  final height;
-  final width;
-  final child;
+  final double height;
+  final double width;
+  final Widget child;
 
-  GlassMorphism({
+  const GlassMorphism({
+    super.key,
     required this.child,
     required this.height,
     required this.width,
@@ -20,7 +21,7 @@ class GlassMorphism extends StatelessWidget {
         25,
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           vertical: 5,
         ),
         height: height,

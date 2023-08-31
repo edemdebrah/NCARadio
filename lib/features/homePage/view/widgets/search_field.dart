@@ -3,7 +3,7 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField({Key? key}) : super(key: key);
+  const SearchField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,10 @@ class SearchField extends StatelessWidget {
               color: Colors.grey.shade700,
               blurRadius: 10,
               spreadRadius: 1,
-              offset: Offset(2, 2),
+              offset: const Offset(2, 2),
               inset: true,
             ),
-            BoxShadow(
+            const BoxShadow(
               color: Colors.white,
               blurRadius: 10,
               spreadRadius: 1,
@@ -31,7 +31,7 @@ class SearchField extends StatelessWidget {
           ],
         ),
         child: Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           //height: 40,
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
@@ -42,10 +42,10 @@ class SearchField extends StatelessWidget {
                 color: Colors.grey.shade700,
                 blurRadius: 10,
                 spreadRadius: 1,
-                offset: Offset(2, 2),
+                offset: const Offset(2, 2),
                 inset: true,
               ),
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.white,
                 blurRadius: 10,
                 spreadRadius: 1,
@@ -59,10 +59,10 @@ class SearchField extends StatelessWidget {
             child: TextField(
               // onChanged: (){},
               // keyboardType: TextInputType.emailAddress,
-              style: TextStyle(color: Colors.black87),
+              style: const TextStyle(color: Colors.black87),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
+                contentPadding: const EdgeInsets.only(top: 14),
                 suffixIcon: Icon(
                   Icons.search,
                   color: Colors.green[800],

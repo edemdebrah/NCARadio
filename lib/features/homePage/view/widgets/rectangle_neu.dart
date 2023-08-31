@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RectangleNeu extends StatelessWidget {
-  const RectangleNeu({Key? key}) : super(key: key);
+  const RectangleNeu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class RectangleNeu extends StatelessWidget {
                       height: 80,
                       width: 90,
                     ),
-                    Text('Listen to your Favorite Ghanaian DAB channels!'),
+                    const Text('Listen to your Favorite Ghanaian DAB channels!'),
                   ],
                 ),
               ),
