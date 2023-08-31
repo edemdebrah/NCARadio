@@ -1,5 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:dab_online_radio/features/homePage/model/dab_stations_model.dart';
+import 'package:dab_online_radio/core/model/dab_station.dart';
 import 'package:dab_online_radio/features/homePage/view/widgets/search_field.dart';
 import 'package:dab_online_radio/features/homePage/view/widgets/stations_list.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
@@ -54,9 +54,10 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 flex: 4,
                 child: ListView.builder(
-                    itemCount: stationsList.length,
+                    itemCount: DABStationModel.stationsList.length,
                     itemBuilder: (context, index) {
-                      final stationsListCurrentIndex = stationsList[index];
+                      final stationsListCurrentIndex =
+                          DABStationModel.stationsList[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20.0,
