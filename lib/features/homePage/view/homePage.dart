@@ -1,8 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:dab_online_radio/core/model/dab_station.dart';
+import 'package:dab_online_radio/features/homePage/logic/radio_manager_logic/radio_manager_bloc.dart';
 import 'package:dab_online_radio/features/homePage/view/widgets/search_field.dart';
 import 'package:dab_online_radio/features/homePage/view/widgets/stations_list.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,22 +53,25 @@ class _HomePageState extends State<HomePage> {
 
               //defining the section to display list of stations
               //being broadcasted
-              Expanded(
-                flex: 4,
-                child: ListView.builder(
-                    itemCount: DABStationModel.stationsList.length,
-                    itemBuilder: (context, index) {
-                      final stationsListCurrentIndex = DABStationModel.stationsList[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 10,
-                        ),
-                        child: StationsList(
-                          station: stationsListCurrentIndex,
-                        ),
-                      );
-                    }),
+              BlocBuilder<RadioManagerBloc, RadioManagerState>(
+                builder: (context, state) {
+                  return Expanded(
+                    flex: 4,
+                    child: ListView.builder(
+                        itemCount: DABStationModel.stationsList.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
+                              vertical: 10,
+                            ),
+                            child: StationsList(
+                              station: DABStationModel.stationsList[index],
+                            ),
+                          );
+                        }),
+                  );
+                },
               ),
             ],
           ),
