@@ -16,6 +16,6 @@ final class FavoritesRepositoryImpl implements FavoritesRepository {
   @override
   Future<void> removeFromFavorites(DABStation station) async {
     station.isFavorite = false;
-    await localdb.addStation(station);
+    await localdb.removeStation(station.no);
   }
 }

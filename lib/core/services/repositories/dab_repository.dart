@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dab_online_radio/core/model/dab_station.dart';
 import 'package:dab_online_radio/core/services/interfaces/dab_interface.dart';
 import 'package:dartz/dartz.dart';
@@ -22,9 +24,10 @@ class DABRepositoryImpl implements DABPlusRepository {
   @override
   Future<Either<ErrorDescription, void>> stopRadio() async {
     try {
-      await player.stop();
+      await player.pause();
       return const Right(null);
     } catch (e) {
+      log(e.toString());
       return Left(ErrorDescription("unable to stop station"));
     }
   }
@@ -36,6 +39,7 @@ class DABRepositoryImpl implements DABPlusRepository {
       await player.play();
       return const Right(null);
     } catch (e) {
+      log(e.toString());
       return Left(ErrorDescription("unable to play station:${e.toString()}"));
     }
   }

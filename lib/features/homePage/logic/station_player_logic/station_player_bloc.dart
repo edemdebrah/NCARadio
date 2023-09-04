@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dab_online_radio/core/services/interfaces/dab_interface.dart';
@@ -13,6 +15,7 @@ class StationPlayerBloc extends Bloc<StationPlayerEvent, StationPlayerState> {
 
   StationPlayerBloc(this.repo) : super(const _Initial()) {
     on<_TuneTo>((event, emit) async {
+      log("tunning");
       final res = await repo.tuneTo(event.channelUrl);
       res.fold(
         (err) => emit(StationPlayerState.playerError(err.toString())),
@@ -21,12 +24,19 @@ class StationPlayerBloc extends Bloc<StationPlayerEvent, StationPlayerState> {
     }, transformer: sequential());
     on<_PlayRadio>((event, emit) async {
       final res = await repo.playRadio();
+      log("Playing");
+
       res.fold(
-        (err) => emit(StationPlayerState.playerError(err.toString())),
+        (err) {
+          log(err.toString());
+          emit(StationPlayerState.playerError(err.toString()));
+        },
         (success) => emit(const StationPlayerState.playing()),
       );
     }, transformer: droppable());
     on<_StopRadio>((event, emit) {
+      log("stopping");
+
       repo.stopRadio();
     }, transformer: droppable());
   }

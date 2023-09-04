@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:dab_online_radio/core/common/widgets/bold_text.dart';
 import 'package:dab_online_radio/core/common/widgets/light_text.dart';
 import 'package:dab_online_radio/core/model/dab_station.dart';
+import 'package:dab_online_radio/features/homePage/logic/radio_manager_logic/radio_manager_bloc.dart';
+import 'package:dab_online_radio/features/homePage/logic/station_player_logic/station_player_bloc.dart';
 import 'package:dab_online_radio/features/radioPlayer/view/widgets/bigRoundNeu.dart';
 import 'package:dab_online_radio/features/radioPlayer/view/widgets/smallRoundNeu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'widgets/neubox.dart';
@@ -43,6 +48,12 @@ class _RadioplayerScreenState extends State<RadioplayerScreen> {
     setState(() {
       isPlaying = !isPlaying;
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    context.read<StationPlayerBloc>().add(StationPlayerEvent.tuneTo(widget.station.channelUrl));
+    super.didChangeDependencies();
   }
 
   @override
@@ -96,6 +107,17 @@ class _RadioplayerScreenState extends State<RadioplayerScreen> {
                       //adding the function to toggle
                       //between favorite modes
                       onTap: () {
+                        if (!isFavorite) {
+                          log("isFavorite -> $isFavorite");
+                          log("Attempting to favorite ${widget.station.stationName}");
+                          context.read<RadioManagerBloc>().add(RadioManagerBlocEvent.addToFavorites(widget.station));
+                        } else {
+                          log("Attempting to remove favorite");
+                          context
+                              .read<RadioManagerBloc>()
+                              .add(RadioManagerBlocEvent.removeFromFavorites(widget.station));
+                        }
+
                         changeFavoriteButton();
                       },
                       child: SizedBox(
@@ -199,6 +221,17 @@ class _RadioplayerScreenState extends State<RadioplayerScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      if (!isPlaying) {
+                        log("isplaying -> $isPlaying");
+                        log("Attempting to play");
+                        context
+                            .read<StationPlayerBloc>()
+                            .add(StationPlayerEvent.playRadio(channelUrl: widget.station.channelUrl));
+                      } else {
+                        log("Attempting to stop playing");
+                        context.read<StationPlayerBloc>().add(const StationPlayerEvent.stopRadio());
+                      }
+
                       changePlayingMode();
                     },
                     child: SmallRoundNeu(

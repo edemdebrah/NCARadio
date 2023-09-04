@@ -1,7 +1,6 @@
 import 'package:dab_online_radio/core/model/dab_station.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:just_audio/just_audio.dart';
 
 abstract interface class DABPlusRepository {
   Future<Either<ErrorDescription, List<DABStationModel>>> scan();

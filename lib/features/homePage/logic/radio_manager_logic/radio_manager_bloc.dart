@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dab_online_radio/core/model/dab_station.dart';
 import 'package:dab_online_radio/core/services/interfaces/dab_interface.dart';
-import 'package:dab_online_radio/features/homePage/domain/entities/station.dart';
 import 'package:dab_online_radio/features/homePage/domain/interfaces/favourites_repos.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,12 +21,15 @@ class RadioManagerBloc extends Bloc<RadioManagerBlocEvent, RadioManagerState> {
     });
     on<_AddToFavorites>((event, emit) async {
       try {
-        await favRepo.favorite(event.station as DABStation);
-        // emit();
-      } catch (err) {}
+        await favRepo.favorite(event.station.toEntity());
+        emit(const RadioManagerState.loadingRadios());
+      } catch (err) {
+        emit(RadioManagerState.radioError("Could not add ${event.station.stationName} to favorites ${err.toString()}"));
+      }
     });
     on<_RemoveFromFavorites>((event, emit) async {
-      // TODO: implement event handler
+      await favRepo.removeFromFavorites(event.station.toEntity());
+      emit(const RadioManagerState.loadingRadios());
     });
   }
 }
